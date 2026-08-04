@@ -2,93 +2,94 @@ import 'package:flutter/material.dart';
 
 import '../components/text.dart';
 import '../config/extensions.dart';
-import '../config/themes.dart';
-import 'components/card.dart';
-import 'components/chip.dart';
+import '../config/theme.dart';
 import 'components/radio.dart';
+import 'components/section.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.theme;
-    final c = context.colors;
+    final c = context.theme;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        backgroundColor: c.transparent,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        shadowColor: c.transparent,
+        surfaceTintColor: c.transparent,
         title: AppText('Portfolio', size: .s20, color: c.text, weight: .bold),
         actions: [
-          RadioGroup<ThemeData>(
-            groupValue: theme,
+          RadioGroup<AppTheme>(
+            groupValue: c,
             onChanged: (value) => context.setTheme(value!),
             child: Padding(
               padding: const EdgeInsets.only(right: 16),
               child: Wrap(
                 spacing: 8,
                 children: [
-                  HomeRadio(theme: ConfigThemes.ocean, label: 'Ocean'),
-                  HomeRadio(theme: ConfigThemes.desert, label: 'Desert'),
-                  HomeRadio(theme: ConfigThemes.forest, label: 'Forest'),
+                  HomeRadio(theme: AppThemes.ocean, label: 'Ocean'),
+                  HomeRadio(theme: AppThemes.desert, label: 'Desert'),
+                  HomeRadio(theme: AppThemes.forest, label: 'Forest'),
                 ],
               ),
             ),
           ),
         ],
       ),
-      body: ColoredBox(
-        color: c.background,
-        child: ListView(
-          padding: const EdgeInsets.all(24),
-          children: [
-            Container(
-              padding: const EdgeInsets.all(32),
-              decoration: BoxDecoration(
-                color: c.card,
-                borderRadius: BorderRadius.circular(24),
-                border: Border.all(color: c.cardBorder),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final sectionHeight = constraints.maxHeight;
+
+          return ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              SizedBox(
+                height: sectionHeight,
+                child: HomeSection(
+                  title: 'Hello',
+                  subtitle: 'Software Engineer',
+                  backgroundColor: c.backDark,
+                ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AppText(
-                    'William Rech',
-                    size: .s36,
-                    color: c.text,
-                    weight: .bold,
-                  ),
-                  const SizedBox(height: 8),
-                  AppText(
-                    'Software engineer building useful products.',
-                    size: .s16,
-                    color: c.textMuted,
-                    weight: .regular,
-                  ),
-                  const SizedBox(height: 16),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: const [
-                      HomeChip('Flutter'),
-                      HomeChip('Backend'),
-                      HomeChip('Product'),
-                    ],
-                  ),
-                ],
+              SizedBox(
+                height: sectionHeight,
+                child: HomeSection(
+                  title: 'Featured Projects',
+                  subtitle: 'My favorite work',
+                  backgroundColor: c.backLight,
+                ),
               ),
-            ),
-            const SizedBox(height: 16),
-            Wrap(
-              spacing: 16,
-              runSpacing: 16,
-              children: const [
-                HomeCard(title: 'Projects', body: 'Selected work'),
-                HomeCard(title: 'Experience', body: 'Roles and impact'),
-                HomeCard(title: 'Contact', body: 'Ways to reach me'),
-              ],
-            ),
-          ],
-        ),
+              SizedBox(
+                height: sectionHeight,
+                child: HomeSection(
+                  title: 'Journey',
+                  subtitle: 'My experience',
+                  backgroundColor: c.backDark,
+                ),
+              ),
+              SizedBox(
+                height: sectionHeight,
+                child: HomeSection(
+                  title: 'Technical Toolbox',
+                  subtitle: 'Technologies & Architecture',
+                  backgroundColor: c.backLight,
+                ),
+              ),
+              SizedBox(
+                height: sectionHeight,
+                child: HomeSection(
+                  title: "Let's Connect",
+                  subtitle: 'Contact',
+                  backgroundColor: c.backDark,
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

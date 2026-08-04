@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'config/extensions.dart';
-import 'config/themes.dart';
+import 'config/theme.dart';
 import 'pages/home.dart';
 
 void main() {
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => ThemeController())],
+      providers: [ChangeNotifierProvider(create: (_) => AppThemeController())],
       child: const App(),
     ),
   );
@@ -19,6 +18,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: const Home(), theme: context.theme);
+    return MaterialApp(home: const Home());
   }
 }
