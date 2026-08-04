@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../components/text.dart';
-import '../../config/extensions.dart';
-import '../../config/theme.dart';
+import '../../../components/text.dart';
+import '../../../config/extensions.dart';
+import '../../../config/theme.dart';
 
 class HomeRadio extends StatelessWidget {
   const HomeRadio({super.key, required this.theme, required this.label});

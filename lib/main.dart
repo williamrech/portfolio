@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'config/theme.dart';
-import 'pages/home.dart';
+import 'pages/home/home.dart';
 
 void main() {
   runApp(
