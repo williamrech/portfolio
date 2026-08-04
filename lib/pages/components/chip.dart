@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../components/text.dart';
 import '../../config/extensions.dart';
 
 class HomeChip extends StatelessWidget {
@@ -10,16 +11,15 @@ class HomeChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
-    final s = context.styles;
 
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: c.primaryContainer,
+        color: c.chip,
         borderRadius: BorderRadius.circular(999),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        child: Text(label, style: s.chipLabel),
+        child: AppText(label, size: .s12, color: c.chipText, weight: .medium),
       ),
     );
   }

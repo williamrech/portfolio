@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../components/text.dart';
 import '../../config/extensions.dart';
 
 class HomeCard extends StatelessWidget {
@@ -10,7 +11,7 @@ class HomeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final s = context.styles;
+    final c = context.colors;
 
     return SizedBox(
       width: 220,
@@ -20,9 +21,9 @@ class HomeCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: s.cardTitle),
+              AppText(title, size: .s16, color: c.cardTitle, weight: .medium),
               const SizedBox(height: 8),
-              Text(body, style: s.cardBody),
+              AppText(body, size: .s14, color: c.cardContent, weight: .regular),
             ],
           ),
         ),

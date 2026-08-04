@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../components/text.dart';
 import '../../config/extensions.dart';
 
 class HomeRadio extends StatelessWidget {
@@ -10,12 +11,13 @@ class HomeRadio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final s = context.styles;
+    final c = context.colors;
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         Radio<ThemeData>(value: theme),
-        Text(label, style: s.themeOption),
+        AppText(label, size: .s14, color: c.text, weight: .regular),
       ],
     );
   }

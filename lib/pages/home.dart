@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../components/text.dart';
 import '../config/extensions.dart';
 import '../config/themes.dart';
 import 'components/card.dart';
@@ -12,12 +13,11 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    final colors = context.colors;
-    final s = context.styles;
+    final c = context.colors;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Portfolio', style: s.appTitle),
+        title: AppText('Portfolio', size: .s20, color: c.text, weight: .bold),
         actions: [
           RadioGroup<ThemeData>(
             groupValue: theme,
@@ -37,25 +37,32 @@ class Home extends StatelessWidget {
         ],
       ),
       body: ColoredBox(
-        color: colors.surface,
+        color: c.background,
         child: ListView(
           padding: const EdgeInsets.all(24),
           children: [
             Container(
               padding: const EdgeInsets.all(32),
               decoration: BoxDecoration(
-                color: colors.surfaceContainerHighest,
+                color: c.card,
                 borderRadius: BorderRadius.circular(24),
-                border: Border.all(color: colors.outlineVariant),
+                border: Border.all(color: c.cardBorder),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('William Rech', style: s.heroTitle),
+                  AppText(
+                    'William Rech',
+                    size: .s36,
+                    color: c.text,
+                    weight: .bold,
+                  ),
                   const SizedBox(height: 8),
-                  Text(
+                  AppText(
                     'Software engineer building useful products.',
-                    style: s.heroSubtitle,
+                    size: .s16,
+                    color: c.textMuted,
+                    weight: .regular,
                   ),
                   const SizedBox(height: 16),
                   Wrap(
