@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../components/text.dart';
 import '../../../config/extensions.dart';
+import 'section_background.dart';
 
 class HomeSection extends StatelessWidget {
   const HomeSection({
@@ -24,25 +25,12 @@ class HomeSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.theme;
-    final hasGradient = previous != null || next != null;
-    final topColor = previous == null ? color : _blend(previous!, color);
-    final bottomColor = next == null ? color : _blend(color, next!);
 
-    return Container(
-      decoration: BoxDecoration(
-        color: hasGradient ? null : color,
-        gradient: hasGradient
-            ? LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [topColor, color, color, bottomColor],
-                stops: const [0, 0.18, 0.82, 1],
-              )
-            : null,
-      ),
+    return HomeSectionBackground(
       height: height,
-      alignment: Alignment.center,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 48),
+      color: color,
+      previous: previous,
+      next: next,
       child: Container(
         constraints: const BoxConstraints(maxWidth: 720),
         child: Column(
@@ -57,6 +45,4 @@ class HomeSection extends StatelessWidget {
       ),
     );
   }
-
-  Color _blend(Color from, Color to) => Color.lerp(from, to, 0.5)!;
 }

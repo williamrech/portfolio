@@ -1,28 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/pages/home/home_bloc.dart';
 
 import '../../components/text.dart';
 import '../../config/extensions.dart';
 import '../../config/theme.dart';
-import 'components/behavior.dart';
+import 'components/hello_section.dart';
 import 'components/radio.dart';
 import 'components/section.dart';
+import 'components/section_navigator.dart';
 
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
   const Home({super.key});
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  final _bloc = HomeBloc();
-
-  @override
-  void dispose() {
-    _bloc.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,53 +43,50 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      body: HomeBehavior(
-        bloc: _bloc,
-        backgroundColor: c.backDark,
-        builder: (context, sectionHeight) => ListView(
-          controller: _bloc.scrollController,
-          padding: EdgeInsets.zero,
-          children: [
-            HomeSection(
-              title: 'Hello',
-              subtitle: 'Software Engineer',
-              height: sectionHeight,
-              color: c.backDark,
-              next: c.backLight,
-            ),
-            HomeSection(
-              title: 'Featured Projects',
-              subtitle: 'My favorite work',
-              height: sectionHeight,
-              color: c.backLight,
-              previous: c.backDark,
-              next: c.backDark,
-            ),
-            HomeSection(
-              title: 'Journey',
-              subtitle: 'My experience',
-              height: sectionHeight,
-              color: c.backDark,
-              previous: c.backLight,
-              next: c.backLight,
-            ),
-            HomeSection(
-              title: 'Technical Toolbox',
-              subtitle: 'Technologies & Architecture',
-              height: sectionHeight,
-              color: c.backLight,
-              previous: c.backDark,
-              next: c.backDark,
-            ),
-            HomeSection(
-              title: "Let's Connect",
-              subtitle: 'Contact',
-              height: sectionHeight,
-              color: c.backDark,
-              previous: c.backLight,
-            ),
-          ],
-        ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final sectionHeight = constraints.maxHeight;
+          return SectionNavigator(
+            children: [
+              HelloSection(
+                height: sectionHeight,
+                color: c.backDark,
+                next: c.backLight,
+              ),
+              HomeSection(
+                title: 'Featured Projects',
+                subtitle: 'My favorite work',
+                height: sectionHeight,
+                color: c.backLight,
+                previous: c.backDark,
+                next: c.backDark,
+              ),
+              HomeSection(
+                title: 'Journey',
+                subtitle: 'My experience',
+                height: sectionHeight,
+                color: c.backDark,
+                previous: c.backLight,
+                next: c.backLight,
+              ),
+              HomeSection(
+                title: 'Technical Toolbox',
+                subtitle: 'Technologies & Architecture',
+                height: sectionHeight,
+                color: c.backLight,
+                previous: c.backDark,
+                next: c.backDark,
+              ),
+              HomeSection(
+                title: "Let's Connect",
+                subtitle: 'Contact',
+                height: sectionHeight,
+                color: c.backDark,
+                previous: c.backLight,
+              ),
+            ],
+          );
+        },
       ),
     );
   }
